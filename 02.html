@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+    <html>
+        <head>
+            <meta charset="utf-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <title>02</title>
+            <!-- bootstrap v5.3 -->
+            <!--
+            <link href="./bootstrap_v5.3/css/bootstrap.min.css" type="text/css">
+            -->
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css" integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+            <!-- custom style -->
+            <style>
+                /* 사용자 정의 스타일 */
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <form method="post" action="login">
+                    <div class="nav justify-content-center">
+                        <div class="card border-primary mt-5 col-4">
+                            <div class="card-header">
+                                로그인
+                            </div>
+                            <div class="card-body">
+                                <div class="mb-3">
+                                    <label class="form-label">아이디</label>
+                                    <input class="form-control" name="userid" type="text" placeholder="아이디">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">비밀번호</label>
+                                    <input class="form-control" name="password" type="password" placeholder="비밀번호">
+                                </div>
+                                <div class="mb-3">
+                                    <label class="form-label">비밀번호</label>
+                                    <textarea class="form-control" name="content" rows="10">asdfasdf</textarea>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <button type="submit" class="btn btn-primary">로그인</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+                <form class="mt-5" method="get">
+                    <div class="mb-3">
+                        <label class="form-label">query</label>
+                        <input class="form-control" name="query" type="text">
+                        <div class="form-text">네이버로 검색하기</div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="form-label col-1">이름</label>
+                        <div class="col-11">
+                            <input class="form-control" name="name" type="text" placeholder="이름">
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">전화번호</label>
+                        <input class="form-control" class="form-control" name="tel" type="phone" maxlength="13" disabled>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">이메일</label>
+                        <input class="form-control" class="form-control" name="email" type="email" readonly value="test@test.com">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">아이디</label>
+                        <input class="form-control" name="name" type="text">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">비밀번호</label>
+                        <input class="form-control" name="password" type="password">
+                    </div>
+                    <div class="mb-3">
+                        <select name="select" class="form-control">
+                            <option value="">1번</option>
+                            <option value="2">2번</option>
+                            <option value="3">3번</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" type="checkbox" name="checkbox" value="1">
+                        <label class="form-check-label">선택</label>
+                    </div>
+                    <div class="mb-3 form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="use" value="1">
+                        <label class="form-check-label">사용</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" type="radio" name="gender" value="1">
+                        <label class="form-check-label">남</label>
+                    </div>
+                    <div class="mb-3">
+                        <input class="form-check-input" type="radio" name="gender" value="2">
+                        <label class="form-check-label">여</label>
+                    </div>
+                    <div class="mb-3">
+                        <button type="submit" class="btn btn-primary">가입</button>
+                        <a href="https://naver.com" class="btn btn-danger">취소</a>
+                    </div>
+                </form>
+            </div>
+
+            <!-- bootstrap v5.3 -->
+            <!--
+            <script src="./bootstrap_v5.3/js/bootstrap.min.js"></script>
+            -->
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js" integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+            <!-- custom script -->
+            <script>
+                /* 사용자 정의 자바스크립트 */
+            </script>
+        </body>
+    </html>
