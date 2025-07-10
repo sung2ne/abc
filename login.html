@@ -16,7 +16,7 @@
                 <div class="row">
                     <div class="col-4">
                         <!-- 로그인 폼 -->
-                        <form action="login" method="post">
+                        <form action="abc" method="post" name="loginForm" id="loginForm">
                             <div class="card">
                                 <div class="card-header">
                                     로그인
@@ -27,31 +27,52 @@
                                         <label for="userid" class="form-label">
                                             아이디
                                         </label>
-                                        <input type="text" class="form-control" name="userid">
+                                        <input type="text" class="form-control" name="userid" id="userid">
                                     </div>
                                     <!-- 비밀번호 -->
                                     <div class="mb-3">
                                         <label for="password" class="form-label">
                                             비밀번호
                                         </label>
-                                        <input type="password" class="form-control" name="password">
+                                        <input type="password" class="form-control" name="password" id="password">
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="submit" class="btn btn-primary">로그인</button>
+                                    <button type="button" id="loginBtn" name="loginBtn" onclick="login();" class="btn btn-primary">로그인</button>
                                 </div>
                             </div>
                         </form>
                     </div>
                 </div>
-
             </div>
 
             <!-- bootstrap v5.3 -->
             <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js" integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
             <!-- custom script -->
             <script>
-                /* 사용자 정의 자바스크립트 */
+                /*
+                // 콘솔에 출력
+                // console.log('hello world');
+
+                // 경고창
+                // alert('hello world');
+                */
+
+                //let name = prompt('아이디를 입력하세요');
+                // console.log(name);
+
+                //let test = confirm('로그인 하시겠습니까?');
+                //console.log(test);
+
+                // 로그인 처리
+                function login() {
+                    const userid = document.getElementById('userid');
+
+                    if (userid.value.trim() == '') {
+                        alert('아이디를 입력해주세요');
+                        userid.focus();
+                    }
+                }
             </script>
         </body>
     </html>
