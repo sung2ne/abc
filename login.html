@@ -16,7 +16,8 @@
                 <div class="row">
                     <div class="col-4">
                         <!-- 로그인 폼 -->
-                        <form action="abc" method="post" name="loginForm" id="loginForm">
+                        <form method="post" name="loginForm" id="loginForm" onsubmit="return login();">
+                            <input type="hidden" name="token" value="secret-code">
                             <div class="card">
                                 <div class="card-header">
                                     로그인
@@ -38,7 +39,7 @@
                                     </div>
                                 </div>
                                 <div class="card-footer">
-                                    <button type="button" id="loginBtn" name="loginBtn" onclick="login();" class="btn btn-primary">로그인</button>
+                                    <button type="submit" id="loginBtn" name="loginBtn" class="btn btn-primary">로그인</button>
                                 </div>
                             </div>
                         </form>
@@ -67,11 +68,22 @@
                 // 로그인 처리
                 function login() {
                     const userid = document.getElementById('userid');
+                    const password = document.getElementById('password');
 
                     if (userid.value.trim() == '') {
                         alert('아이디를 입력해주세요');
                         userid.focus();
+                        return false;
                     }
+
+                    if (password.value.trim() == '') {
+                        alert('비밀번호를 입력해주세요');
+                        password.focus();
+                        return false;
+                    }
+
+                    document.getElementById('loginForm').action = 'abc';
+                    document.getElementById('loginForm').method = 'get';
                 }
             </script>
         </body>
