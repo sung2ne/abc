@@ -59,7 +59,10 @@
                                         <label for="password" class="form-label">
                                             비밀번호&nbsp;<span class="text-danger">*</span>
                                         </label>
-                                        <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
+                                        <div class="input-group">
+                                            <input type="password" class="form-control" name="password" id="password" placeholder="비밀번호">
+                                            <span class="input-group-text" onclick="showPassword();">보기</span>
+                                        </div>
                                         <div class="form-text">8 ~ 20글자 영문자, 숫자, 특수문자(_-$@)를 이용해서 입력해주세요</div>
                                     </div>
                                     <!-- 비밀번호 확인 -->
@@ -129,6 +132,12 @@
                         password.focus();
                         return false;
                     }
+                }
+
+                // 비밀번호를 평문으로 보여주기
+                function showPassword() {
+                    const password = document.getElementById('password');
+                    password.type = 'text';
                 }
             </script>
         </body>
