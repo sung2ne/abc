@@ -65,7 +65,7 @@
             <thead class="table-dark">
                 <tr class="text-center">
                     <th class="col-1">번호</th>
-                    <th><input type="checkbox" class="form-check-input"></th>
+                    <th><input type="checkbox" class="form-check-input" id="checkboxAll"></th>
                     <th class="col-7">제목</th>
                     <th class="col-1">이름</th>
                     <th class="col-2">날짜</th>
@@ -124,6 +124,11 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js"
         integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        // checkboxAll 이벤트 처리 방법 1
+        const checkboxAll = document.getElementById('checkboxAll');
+        console.log(checkboxAll.attributes);
+    </script>
 </body>
 
 </html>
