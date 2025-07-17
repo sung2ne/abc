@@ -221,25 +221,38 @@
             });
         })
 
-        document.getElementById('btnCheckAll').addEventListener('click', function() {
-            // 체크 여부
-            const checked = document.getElementsByClassName('list-checkbox')[0].checked;
+        // 체크 여부
+        let checked = false;
 
+        document.getElementById('btnCheckAll').addEventListener('click', function() {
             // list-checkbox
             const listCheckbox = document.getElementsByClassName('list-checkbox');
 
             // 버튼 글자 바꾸기
+            document.getElementById('btnCheckAll').innerText = checked ? '전체취소' : '전체선택';
+
+            // 버튼색 바꾸기
+            if (checked) {
+                document.getElementById('btnCheckAll').classList.replace('btn-danger', 'btn-primary');
+            } else {
+                document.getElementById('btnCheckAll').classList.replace('btn-primary', 'btn-danger');
+            }
+
+            /*
             if (checked) {
                 document.getElementById('btnCheckAll').innerText = '전체선택';
-                Array.from(listCheckbox).forEach(function(checkbox) {
-                    checkbox.checked = false;
-                });
+                document.getElementById('btnCheckAll').classList.replace('btn-danger', 'btn-primary');
             } else {
                 document.getElementById('btnCheckAll').innerText = '전체취소';
-                Array.from(listCheckbox).forEach(function(checkbox) {
-                    checkbox.checked = true;
-                });
+                document.getElementById('btnCheckAll').classList.replace('btn-primary', 'btn-danger');
             }
+            */
+
+            checked = !checked;
+
+            Array.from(listCheckbox).forEach(function(checkbox) {
+                checkbox.checked = checked;
+            });
         });
     </script>
 </body>
