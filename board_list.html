@@ -52,6 +52,7 @@
             <div class="col-6">
                 Total 11 / 1 Page
                 <button type="button" class="btn btn-primary btn-sm ms-3" id="btnCheckAll">전체선택</button>
+                <button type="button" class="btn btn-primary btn-sm ms-3" id="btnCheckAll2">전체선택</button>
             </div>
             <div class="col-6 text-end">
                 <i class="bi bi-gear-fill text-danger"></i>&nbsp;
@@ -229,13 +230,16 @@
             const listCheckbox = document.getElementsByClassName('list-checkbox');
 
             // 버튼 글자 바꾸기
-            document.getElementById('btnCheckAll').innerText = checked ? '전체취소' : '전체선택';
+            document.getElementById('btnCheckAll').innerText = checked ? '전체선택' : '전체취소';
+            document.getElementById('btnCheckAll2').innerText = checked ? '전체선택' : '전체취소';
 
             // 버튼색 바꾸기
             if (checked) {
                 document.getElementById('btnCheckAll').classList.replace('btn-danger', 'btn-primary');
+                document.getElementById('btnCheckAll2').classList.replace('btn-danger', 'btn-primary');
             } else {
                 document.getElementById('btnCheckAll').classList.replace('btn-primary', 'btn-danger');
+                document.getElementById('btnCheckAll2').classList.replace('btn-primary', 'btn-danger');
             }
 
             /*
@@ -253,6 +257,40 @@
             Array.from(listCheckbox).forEach(function(checkbox) {
                 checkbox.checked = checked;
             });
+        });
+
+        document.getElementById('btnCheckAll2').addEventListener('click', function() {
+            let answer;
+
+            if (checked) {
+                answer = confirm('전체취소를 하시겠습니까?');
+            } else {
+                answer = confirm('전체선택을 하시겠습니까?');
+            }
+
+            if (answer) {
+                // list-checkbox
+                const listCheckbox = document.getElementsByClassName('list-checkbox');
+
+                // 버튼 글자 바꾸기
+                document.getElementById('btnCheckAll').innerText = checked ? '전체선택' : '전체취소';
+                document.getElementById('btnCheckAll2').innerText = checked ? '전체선택' : '전체취소';
+
+                // 버튼색 바꾸기
+                if (checked) {
+                    document.getElementById('btnCheckAll').classList.replace('btn-danger', 'btn-primary');
+                    document.getElementById('btnCheckAll2').classList.replace('btn-danger', 'btn-primary');
+                } else {
+                    document.getElementById('btnCheckAll').classList.replace('btn-primary', 'btn-danger');
+                    document.getElementById('btnCheckAll2').classList.replace('btn-primary', 'btn-danger');
+                }
+
+                checked = !checked;
+
+                Array.from(listCheckbox).forEach(function(checkbox) {
+                    checkbox.checked = checked;
+                });
+            }
         });
     </script>
 </body>
