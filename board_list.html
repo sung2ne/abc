@@ -63,7 +63,7 @@
             </div>
         </div>
         <!-- 목록 -->
-        <table class="table mt-3">
+        <table class="table table-hover mt-3">
             <thead class="table-dark">
                 <tr class="text-center">
                     <th class="col-1">번호</th>
@@ -71,68 +71,97 @@
                     <th><input type="checkbox" class="form-check-input" id="checkboxAll" onchange="changeAll();"></th>
                     -->
                     <th><input type="checkbox" class="form-check-input" id="checkboxAll"></th>
-                    <th class="col-7">제목</th>
+                    <th class="col-5">제목</th>
                     <th class="col-1">이름</th>
                     <th class="col-2">날짜</th>
                     <th class="col-1">조회</th>
+                    <th class="col-2">관리</th>
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-light">
+                <tr class="table-light" onclick="location.href='board_read.html?id=1';">
                     <td class="text-center"><span class="badge text-bg-dark">알림</span></td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox1"></td>
-                    <td><span class="badge text-bg-danger me-1">N</span><a href="board_read.html" class="fw-bold">25</a></td>
+                    <td><span class="badge text-bg-danger me-1">N</span><a href="board_read.html?id=1" class="fw-bold">25</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=1">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html?id=2">11111</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=2">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html?id=3">22222</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=3">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html?id=4">33333</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=4">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html?id=5">44444</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=5">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html?id=6">55555</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=6">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
-                    <td><a href="board_read.html">118745</a></td>
+                    <td><a href="board_read.html">66666</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
                     <td class="text-center">100</td>
+                    <td class="text-center">
+                        <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=7">수정</a>
+                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                    </td>
                 </tr>
             </tbody>
         </table>
