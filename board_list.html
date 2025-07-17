@@ -65,7 +65,7 @@
             <thead class="table-dark">
                 <tr class="text-center">
                     <th class="col-1">번호</th>
-                    <th><input type="checkbox" class="form-check-input" id="checkboxAll"></th>
+                    <th><input type="checkbox" class="form-check-input" id="checkboxAll" onchange="changeAll();"></th>
                     <th class="col-7">제목</th>
                     <th class="col-1">이름</th>
                     <th class="col-2">날짜</th>
@@ -75,7 +75,7 @@
             <tbody>
                 <tr class="table-light">
                     <td class="text-center"><span class="badge text-bg-dark">알림</span></td>
-                    <td><input type="checkbox" class="form-check-input"></td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox1"></td>
                     <td><span class="badge text-bg-danger me-1">N</span><a href="board_read.html" class="fw-bold">25</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
@@ -83,7 +83,47 @@
                 </tr>
                 <tr>
                     <td class="text-center">1</td>
-                    <td><input type="checkbox" class="form-check-input"></td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
+                    <td><a href="board_read.html">118745</a></td>
+                    <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
+                    <td class="text-center text-danger">2025-07-11</td>
+                    <td class="text-center">100</td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
+                    <td><a href="board_read.html">118745</a></td>
+                    <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
+                    <td class="text-center text-danger">2025-07-11</td>
+                    <td class="text-center">100</td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
+                    <td><a href="board_read.html">118745</a></td>
+                    <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
+                    <td class="text-center text-danger">2025-07-11</td>
+                    <td class="text-center">100</td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
+                    <td><a href="board_read.html">118745</a></td>
+                    <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
+                    <td class="text-center text-danger">2025-07-11</td>
+                    <td class="text-center">100</td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
+                    <td><a href="board_read.html">118745</a></td>
+                    <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
+                    <td class="text-center text-danger">2025-07-11</td>
+                    <td class="text-center">100</td>
+                </tr>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox2"></td>
                     <td><a href="board_read.html">118745</a></td>
                     <td class="text-center"><i class="bi bi-person-circle me-1"></i>대표</td>
                     <td class="text-center text-danger">2025-07-11</td>
@@ -125,9 +165,49 @@
         integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
-        // checkboxAll 이벤트 처리 방법 1
         const checkboxAll = document.getElementById('checkboxAll');
-        console.log(checkboxAll.attributes);
+        console.log(checkboxAll.checked);
+
+        /*
+        // checkboxAll 이벤트 처리 방법 1
+        function changeAll() {
+            document.getElementById('checkbox1').checked = document.getElementById('checkboxAll').checked;
+            document.getElementById('checkbox2').checked = document.getElementById('checkboxAll').checked;
+        }
+        */
+
+        /*
+        // checkboxAll 이벤트 처리 방법 2
+        function changeAll() {
+            document.getElementsByClassName('list-checkbox')[0].checked = document.getElementById('checkboxAll').checked;
+            document.getElementsByClassName('list-checkbox')[1].checked = document.getElementById('checkboxAll').checked;
+        }
+        */
+
+        /*
+        // checkboxAll 이벤트 처리 방법 3
+        function changeAll() {
+            const count = document.getElementsByClassName('list-checkbox').length;
+            console.log(count);
+
+            for (let i = 0; i < count; i++) {
+                document.getElementsByClassName('list-checkbox')[i].checked = document.getElementById('checkboxAll').checked;
+            }
+        }
+        */
+
+        // checkboxAll 이벤트 처리 방법 4
+        function changeAll() {
+            const listCheckbox = document.getElementsByClassName('list-checkbox');
+            //console.log(listCheckbox);
+            //console.log('----');
+            //console.log(Array.from(listCheckbox));
+
+            Array.from(listCheckbox).forEach(function(checkbox, i) {
+                console.log(i);
+                checkbox.checked = document.getElementById('checkboxAll').checked;
+            });
+        }
     </script>
 </body>
 
