@@ -51,6 +51,7 @@
         <div class="row">
             <div class="col-6">
                 Total 11 / 1 Page
+                <button type="button" class="btn btn-primary btn-sm ms-3" id="btnCheckAll">전체선택</button>
             </div>
             <div class="col-6 text-end">
                 <i class="bi bi-gear-fill text-danger"></i>&nbsp;
@@ -65,7 +66,10 @@
             <thead class="table-dark">
                 <tr class="text-center">
                     <th class="col-1">번호</th>
+                    <!--
                     <th><input type="checkbox" class="form-check-input" id="checkboxAll" onchange="changeAll();"></th>
+                    -->
+                    <th><input type="checkbox" class="form-check-input" id="checkboxAll"></th>
                     <th class="col-7">제목</th>
                     <th class="col-1">이름</th>
                     <th class="col-2">날짜</th>
@@ -166,7 +170,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         const checkboxAll = document.getElementById('checkboxAll');
-        console.log(checkboxAll.checked);
+        // console.log(checkboxAll.checked);
 
         /*
         // checkboxAll 이벤트 처리 방법 1
@@ -208,6 +212,35 @@
                 checkbox.checked = document.getElementById('checkboxAll').checked;
             });
         }
+
+        // checkboxAll 이벤트 처리 방법 5
+        document.getElementById('checkboxAll').addEventListener('change', function() {
+            const listCheckbox = document.getElementsByClassName('list-checkbox');
+            Array.from(listCheckbox).forEach(function(checkbox) {
+                checkbox.checked = document.getElementById('checkboxAll').checked;
+            });
+        })
+
+        document.getElementById('btnCheckAll').addEventListener('click', function() {
+            // 체크 여부
+            const checked = document.getElementsByClassName('list-checkbox')[0].checked;
+
+            // list-checkbox
+            const listCheckbox = document.getElementsByClassName('list-checkbox');
+
+            // 버튼 글자 바꾸기
+            if (checked) {
+                document.getElementById('btnCheckAll').innerText = '전체선택';
+                Array.from(listCheckbox).forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+            } else {
+                document.getElementById('btnCheckAll').innerText = '전체취소';
+                Array.from(listCheckbox).forEach(function(checkbox) {
+                    checkbox.checked = true;
+                });
+            }
+        });
     </script>
 </body>
 
