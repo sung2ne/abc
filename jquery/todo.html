@@ -56,9 +56,14 @@
 
             let html = '<div class="mt-3 bg-light rounded-3" id="box' + num + '">';
             html += '<div class="p-2 d-flex justify-content-between">';
-            html += '<div>' + task + '</div>';
-            html += '<button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + num + '" onclick="del(' + num + ')">Delete</button>';
-            html += '</div></div>';
+            html += '<div>';
+            html += '<span id="text' + num + '">' + task + '</span>';
+            html += '<input type="text" id="input' + num + '" class="form-control d-none" value="' + task + '">';
+            html += '</div>';
+            html += '<div>';
+            html += '<button type="button" class="btn btn-warning btn-sm btn-edit me-2" data-id="' + num + '" data-role="edit" onclick="edit(' + num + ')" id="btnEdit' + num + '">Edit</button>';
+            html += '<button type="button" class="btn btn-danger btn-sm btn-delete" data-id="' + num + '" onclick="del(' + num + ')" id="btnDelete' + num + '">Delete</button>';
+            html += '</div></div></div>';
 
             document.getElementById('todos').innerHTML += html;
             document.getElementById('task').value = '';
@@ -68,6 +73,29 @@
         // 삭제
         function del(id) {
             document.getElementById('box' + id).remove();
+        }
+
+        // 수정, 저장
+        function edit(id) {
+            let role = document.getElementById('btnEdit' + id).dataset.role;
+
+            // 수정
+            if (role == 'edit') {
+                document.getElementById('text' + id).classList.add('d-none');
+                document.getElementById('input' + id).classList.remove('d-none');
+                document.getElementById('btnEdit' + id).innerText = 'save';
+                document.getElementById('btnEdit' + id).classList.replace('btn-warning', 'btn-success');
+                document.getElementById('btnDelete' + id).classList.add('d-none');
+                document.getElementById('btnEdit' + id).dataset.role = 'save';
+            } else {
+                document.getElementById('text' + id).classList.remove('d-none');
+                document.getElementById('text' + id).innerText = document.getElementById('input' + id).value;
+                document.getElementById('input' + id).classList.add('d-none');
+                document.getElementById('btnEdit' + id).innerText = 'edit';
+                document.getElementById('btnEdit' + id).classList.replace('btn-success', 'btn-warning');
+                document.getElementById('btnDelete' + id).classList.remove('d-none');
+                document.getElementById('btnEdit' + id).dataset.role = 'edit';
+            }
         }
     </script>
 </body>
