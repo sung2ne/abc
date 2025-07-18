@@ -79,7 +79,7 @@
                 </tr>
             </thead>
             <tbody>
-                <tr class="table-light" onclick="location.href='board_read.html?id=1';">
+                <tr class="table-light">
                     <td class="text-center"><span class="badge text-bg-dark">알림</span></td>
                     <td><input type="checkbox" class="form-check-input list-checkbox" id="checkbox1"></td>
                     <td><span class="badge text-bg-danger me-1">N</span><a href="board_read.html?id=1" class="fw-bold">25</a></td>
@@ -88,7 +88,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=1">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3" onclick="del(1);">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -100,7 +100,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=2">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3" onclick="del(2);">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -112,7 +112,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=3">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3 btn-delete" data-id="3">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -124,7 +124,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=4">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3 btn-delete" data-id="4">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -136,7 +136,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=5">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3 btn-delete" data-id="5">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -148,7 +148,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=6">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3 btn-delete" data-id="6">삭제</button>
                     </td>
                 </tr>
                 <tr>
@@ -160,7 +160,7 @@
                     <td class="text-center">100</td>
                     <td class="text-center">
                         <a type="button" class="btn btn-warning btn-sm" href="board_edit.html?id=7">수정</a>
-                        <button type="button" class="btn btn-danger btn-sm ms-3">삭제</button>
+                        <button type="button" class="btn btn-danger btn-sm ms-3 btn-delete" data-id="7">삭제</button>
                     </td>
                 </tr>
             </tbody>
@@ -320,6 +320,27 @@
                     checkbox.checked = checked;
                 });
             }
+        });
+
+        // 삭제 1
+        function del(id) {
+            const answer = confirm('삭제하시겠습니까?');
+
+            if (answer) {
+                location.href='board_delete.html?' + id;
+            }
+        }
+
+        // 삭제 2
+        document.querySelectorAll('.btn-delete').forEach(function(button) {
+            button.addEventListener('click', function() {
+                const answer = confirm('삭제하시겠습니까?');
+
+                if (answer) {
+                    const id = this.dataset.id; // 또는 this.getAttribute('data-id')
+                    location.href = 'board_delete.html?id=' + id;
+                }
+            });
         });
     </script>
 </body>
