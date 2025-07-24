@@ -20,40 +20,9 @@
 <body>
     <div class="container pt-5">
         <div class="mb-3">
-            <button type="button" class="btn btn-sm btn-primary">네임 카드 추가</button>
+            <button type="button" class="btn btn-sm btn-primary" onclick="add();">네임 카드 추가</button>
         </div>
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-            <!-- 네임 카드 -->
-            <div class="col">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <div class="mb-3">
-                                (주)좋은사람들
-                            </div>
-                            <div class="mb-3">
-                                <span class="text-muted">과장</span>&nbsp;홍길동
-                            </div>
-                            <div class="mb-3 d-flex justify-content-between">
-                                <div>
-                                    010-1234-5678
-                                </div>
-                                <div>
-                                    hong@test.com
-                                </div>
-                            </div>
-                            <div class="mb-3">
-                                서울시 서대문구 가좌로 134
-                            </div>
-                        </p>
-                        <div class="d-flex justify-content-end">
-                            <button type="button" class="btn btn-sm btn-outline-warning me-2">수정</button>
-                            <button type="button" class="btn btn-sm btn-outline-danger">삭제</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!--// 네임 카드 -->
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="nameCards">
         </div>
     </div>
 
@@ -65,6 +34,55 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
         integrity="sha512-JobWAqYk5CSjWuVV3mxgS+MmccJqkrBaDhk8SKS1BW+71dJ9gzascwzW85UwGhxiSyR7Pxhu50k+Nl3+o5I49A=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let num = 1;
+
+        // 짝수 구분 함수
+        function isEven(i) {
+            return (i % 2) ? false : true;
+        }
+
+        // 추가
+        function add() {
+            let html = '<div class="col">';
+            html += '<div class="card shadow-sm ';
+
+            // 홀수에 배경 넣기
+            if (!isEven(num)) html += 'bg-light';
+
+            html += '">';
+            html += '<div class="card-body">';
+            html += '<p class="card-text">';
+            html += '<div class="mb-3">';
+            html += '(주)좋은사람들';
+            html += '</div>';
+            html += '<div class="mb-3">';
+            html += '<span class="text-muted">과장</span>&nbsp;홍길동';
+            html += '</div>';
+            html += '<div class="mb-3 d-flex justify-content-between">';
+            html += '<div>';
+            html += '010-1234-5678';
+            html += '</div>';
+            html += '<div>';
+            html += 'hong@test.com';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="mb-3">';
+            html += '서울시 서대문구 가좌로 134';
+            html += '</div>';
+            html += '</p>';
+            html += '<div class="d-flex justify-content-end">';
+            html += '<button type="button" class="btn btn-sm btn-outline-warning me-2">수정</button>';
+            html += '<button type="button" class="btn btn-sm btn-outline-danger">삭제</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            document.getElementById('nameCards').innerHTML += html;
+            num++;
+        }
+    </script>
 </body>
 
 </html>
