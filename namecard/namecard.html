@@ -44,7 +44,7 @@
 
         // 추가
         function add() {
-            let html = '<div class="col">';
+            let html = '<div class="col" id="nameCard' + num + '">';
             html += '<div class="card shadow-sm ';
 
             // 홀수에 배경 넣기
@@ -73,7 +73,7 @@
             html += '</p>';
             html += '<div class="d-flex justify-content-end">';
             html += '<button type="button" class="btn btn-sm btn-outline-warning me-2">수정</button>';
-            html += '<button type="button" class="btn btn-sm btn-outline-danger">삭제</button>';
+            html += '<button type="button" class="btn btn-sm btn-outline-danger" onclick="del(' + num + ')">삭제</button>';
             html += '</div>';
             html += '</div>';
             html += '</div>';
@@ -81,6 +81,11 @@
 
             document.getElementById('nameCards').innerHTML += html;
             num++;
+        }
+
+        // 삭제
+        function del(id) {
+            if (confirm("삭제하시겠습니까?")) document.getElementById('nameCard' + id).remove();
         }
     </script>
 </body>
