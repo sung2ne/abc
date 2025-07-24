@@ -45,46 +45,101 @@
         // 추가
         function add() {
             let company = '(주)좋은사람들';
+            let position = '과장';
             let name = '홍길동';
             let tel = '010-1234-5678';
             let email = 'hong@test.com';
             let html = '<div class="col" id="nameCard' + num + '">';
             let address = '서울시 서대문구 가좌로 134';
+
+            html += '<div>';
+
+            // 텍스트 화면
             html += '<div class="card shadow-sm ';
 
             // 홀수에 배경 넣기
             if (!isEven(num)) html += 'bg-light';
 
-            html += '">';
+            html += '" id="cardText' + num + '">';
             html += '<div class="card-body">';
             html += '<p class="card-text">';
             html += '<div class="mb-3">';
+            // 회사
             html += '<span id="companyText' + num + '">' + company + '</span>';
-            html += '<input type="text" id="companyInput' + num + '" class="form-control d-none" value="' + company + '">';
             html += '</div>';
             html += '<div class="mb-3">';
-            html += '<span class="text-muted">과장</span>&nbsp;';
+            // 직책
+            html += '<span class="text-muted" id="positionText' + num + '">' + position + '</span>&nbsp;';
+            // 이름
             html += '<span id="nameText' + num + '">' + name + '</span>';
-            html += '<input type="text" id="nameInput' + num + '" class="form-control d-none" value="' + name + '">';
             html += '</div>';
             html += '<div class="mb-3 d-flex justify-content-between">';
             html += '<div>';
+            // 연락처
             html += '<span id="telText' + num + '">' + tel + '</span>';
-            html += '<input type="tel" id="telInput' + num + '" class="form-control d-none" value="' + tel + '">';
             html += '</div>';
             html += '<div>';
+            // 이메일
             html += '<span id="emailText' + num + '">' + email + '</span>';
-            html += '<input type="email" id="emailInput' + num + '" class="form-control d-none" value="' + email + '">';
             html += '</div>';
             html += '</div>';
             html += '<div class="mb-3">';
+            // 주소
             html += '<span id="addressText' + num + '">' + address + '</span>';
-            html += '<input type="text" id="addressInput' + num + '" class="form-control d-none" value="' + address + '">';
             html += '</div>';
             html += '</p>';
             html += '<div class="d-flex justify-content-end">';
             html += '<button type="button" class="btn btn-sm btn-outline-warning me-2" data-role="edit" onclick="edit(' + num + ')" id="btnEdit' + num + '">수정</button>';
             html += '<button type="button" class="btn btn-sm btn-outline-danger" onclick="del(' + num + ')" id="btnDelete' + num + '">삭제</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // 수정 화면
+            html += '<div class="card d-none shadow-sm ';
+
+            // 홀수에 배경 넣기
+            if (!isEven(num)) html += 'bg-light';
+
+            html += '" id="cardForm' + num + '">';
+            html += '<div class="card-body">';
+            html += '<p class="card-text">';
+            // 회사
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="companyInput' + num + '" class="form-control" value="' + company + '">';
+            html += '</div>';
+            // 직책
+            html += '<div class="mb-3">';
+            html += '<select id="positionSelect' + num + '" class="form-select">';
+            html += '<option value="사장" ' + (position == '사장' ? 'selected' : '') + '>사장</option>';
+            html += '<option value="이사" ' + (position == '이사' ? 'selected' : '') + '>이사</option>';
+            html += '<option value="부장" ' + (position == '부장' ? 'selected' : '') + '>부장</option>';
+            html += '<option value="과장" ' + (position == '과장' ? 'selected' : '') + '>과장</option>';
+            html += '<option value="대리" ' + (position == '대리' ? 'selected' : '') + '>대리</option>';
+            html += '<option value="사원" ' + (position == '사원' ? 'selected' : '') + '>사원</option>';
+            html += '</select>'
+            html += '</div>';
+            // 이름
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="nameInput' + num + '" class="form-control" value="' + name + '">';
+            html += '</div>';
+            // 연락처
+            html += '<div class="mb-3">';
+            html += '<input type="tel" id="telInput' + num + '" class="form-control" value="' + tel + '">';
+            html += '</div>';
+            // 이메일
+            html += '<div class="mb-3">';
+            html += '<input type="email" id="emailInput' + num + '" class="form-control" value="' + email + '">';
+            html += '</div>';
+            // 주소
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="addressInput' + num + '" class="form-control" value="' + address + '">';
+            html += '</div>';
+            html += '</p>';
+            html += '<div class="d-flex justify-content-end">';
+            html += '<button type="button" class="btn btn-sm btn-outline-success" data-role="save" onclick="save(' + num + ')" id="btnSave' + num + '">저장</button>';
+            html += '</div>';
             html += '</div>';
             html += '</div>';
             html += '</div>';
@@ -99,61 +154,41 @@
             if (confirm("삭제하시겠습니까?")) document.getElementById('nameCard' + id).remove();
         }
 
-        // 수정, 저장
+        // 수정
         function edit(id) {
-            let role = document.getElementById('btnEdit' + id).dataset.role;
+            document.getElementById('cardText' + id).classList.add('d-none');
+            document.getElementById('cardForm' + id).classList.remove('d-none');
+        }
 
-            // 수정
-            if (role == 'edit') {
-                // 회사
-                document.getElementById('companyText' + id).classList.add('d-none');
-                document.getElementById('companyInput' + id).classList.remove('d-none');
-                // 이름
-                document.getElementById('nameText' + id).classList.add('d-none');
-                document.getElementById('nameInput' + id).classList.remove('d-none');
-                // 연락처
-                document.getElementById('telText' + id).classList.add('d-none');
-                document.getElementById('telInput' + id).classList.remove('d-none');
-                // 이메일
-                document.getElementById('emailText' + id).classList.add('d-none');
-                document.getElementById('emailInput' + id).classList.remove('d-none');
-                // 주소
-                document.getElementById('addressText' + id).classList.add('d-none');
-                document.getElementById('addressInput' + id).classList.remove('d-none');
-                // 저장 버튼
-                document.getElementById('btnEdit' + id).innerText = '저장';
-                document.getElementById('btnEdit' + id).classList.replace('btn-outline-warning', 'btn-outline-success');
-                document.getElementById('btnEdit' + id).dataset.role = 'save';
-                // 삭제 버튼
-                document.getElementById('btnDelete' + id).classList.add('d-none');
-            } else {
-                // 회사
-                document.getElementById('companyText' + id).classList.remove('d-none');
-                document.getElementById('companyText' + id).innerText = document.getElementById('companyInput' + id).value;
-                document.getElementById('companyInput' + id).classList.add('d-none');
-                // 이름
-                document.getElementById('nameText' + id).classList.remove('d-none');
-                document.getElementById('nameText' + id).innerText = document.getElementById('nameInput' + id).value;
-                document.getElementById('nameInput' + id).classList.add('d-none');
-                // 연락처
-                document.getElementById('telText' + id).classList.remove('d-none');
-                document.getElementById('telText' + id).innerText = document.getElementById('telInput' + id).value;
-                document.getElementById('telInput' + id).classList.add('d-none');
-                // 이메일
-                document.getElementById('emailText' + id).classList.remove('d-none');
-                document.getElementById('emailText' + id).innerText = document.getElementById('emailInput' + id).value;
-                document.getElementById('emailInput' + id).classList.add('d-none');
-                // 주소
-                document.getElementById('addressText' + id).classList.remove('d-none');
-                document.getElementById('addressText' + id).innerText = document.getElementById('addressInput' + id).value;
-                document.getElementById('addressInput' + id).classList.add('d-none');
-                // 수정 버튼
-                document.getElementById('btnEdit' + id).innerText = '수정';
-                document.getElementById('btnEdit' + id).classList.replace('btn-outline-success', 'btn-outline-warning');
-                document.getElementById('btnEdit' + id).dataset.role = 'edit';
-                // 삭제 버튼
-                document.getElementById('btnDelete' + id).classList.remove('d-none');
-            }
+        // 저장
+        function save(id) {
+            document.getElementById('cardText' + id).classList.remove('d-none');
+            document.getElementById('cardForm' + id).classList.add('d-none');
+
+            // 회사
+            document.getElementById('companyText' + id).classList.remove('d-none');
+            document.getElementById('companyText' + id).innerText = document.getElementById('companyInput' + id).value;
+            document.getElementById('companyInput' + id).classList.add('d-none');
+            // 직책
+            document.getElementById('positionText' + id).classList.remove('d-none');
+            document.getElementById('positionText' + id).innerText = document.getElementById('positionSelect' + id).value;
+            document.getElementById('positionSelect' + id).classList.add('d-none');
+            // 이름
+            document.getElementById('nameText' + id).classList.remove('d-none');
+            document.getElementById('nameText' + id).innerText = document.getElementById('nameInput' + id).value;
+            document.getElementById('nameInput' + id).classList.add('d-none');
+            // 연락처
+            document.getElementById('telText' + id).classList.remove('d-none');
+            document.getElementById('telText' + id).innerText = document.getElementById('telInput' + id).value;
+            document.getElementById('telInput' + id).classList.add('d-none');
+            // 이메일
+            document.getElementById('emailText' + id).classList.remove('d-none');
+            document.getElementById('emailText' + id).innerText = document.getElementById('emailInput' + id).value;
+            document.getElementById('emailInput' + id).classList.add('d-none');
+            // 주소
+            document.getElementById('addressText' + id).classList.remove('d-none');
+            document.getElementById('addressText' + id).innerText = document.getElementById('addressInput' + id).value;
+            document.getElementById('addressInput' + id).classList.add('d-none');
         }
     </script>
 </body>
