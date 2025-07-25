@@ -79,6 +79,10 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js"
         integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jquery v3.7.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         let num = 1;
 
@@ -88,16 +92,6 @@
             keyboard: false, // esc 막기
         });
 
-        // 모달 보일 때 이벤트
-        document.getElementById('exampleModal').addEventListener('show.bs.modal', event => {
-            document.addForm.reset();   // 폼 초기화
-        });
-
-        // 모달 숨길 때 이벤트
-        document.getElementById('exampleModal').addEventListener('hidden.bs.modal', event => {
-            document.addForm.reset();   // 폼 초기화
-        });
-
         // 짝수 구분 함수
         function isEven(i) {
             return (i % 2) ? false : true;
@@ -105,12 +99,12 @@
 
         // 추가
         function add() {
-            let company = document.addForm.company.value;
-            let position = document.addForm.position.value;
-            let name = document.addForm.name.value;
-            let tel = document.addForm.tel.value;
-            let email = document.addForm.email.value;
-            let address = document.addForm.address.value;
+            let company = $('input[name=company]').val();
+            let position = $('select[name=position]').val();
+            let name = $('input[name=name]').val();
+            let tel = $('input[name=tel]').val();
+            let email = $('input[name=email]').val();
+            let address = $('input[name=address]').val();
             let html = '<div class="col" id="nameCard' + num + '">';
 
             html += '<div>';
@@ -158,6 +152,7 @@
             html += '</div>';
 
             // 수정 화면
+            html += '<form name="editForm' + num + '">';
             html += '<div class="card d-none shadow-sm ';
 
             // 홀수에 배경 넣기
@@ -199,24 +194,29 @@
             html += '</div>';
             html += '</p>';
             html += '<div class="d-flex justify-content-end">';
+            html += '<button type="button" class="btn btn-sm btn-secondary me-2" onclick="cancel(' + num + ')"';
+            html += ' data-company="' + company + '"';
+            html += ' data-position="' + position + '"';
+            html += ' data-name="' + name + '"';
+            html += ' data-tel="' + tel + '"';
+            html += ' data-email="' + email + '"';
+            html += ' data-address="' + address + '"';
+            html += ' id="cancelSave' + num + '">취소</button>';
             html += '<button type="button" class="btn btn-sm btn-outline-success" data-role="save" onclick="save(' + num + ')" id="btnSave' + num + '">저장</button>';
             html += '</div>';
             html += '</div>';
+            html += '</form>';
             html += '</div>';
             html += '</div>';
             html += '</div>';
 
-            document.getElementById('nameCards').innerHTML += html;
+            $('#nameCards').append(html);
             num++;
 
             // 폼 초기화
-            // document.addForm.company.value = '';
-            // document.addForm.position.value = '사장';
-            // document.addForm.name.value = '';
-            // document.addForm.tel.value = '';
-            // document.addForm.email.value = '';
-            // document.addForm.address.value = '';
-            // document.addForm.reset();
+            $('form[name=addForm]').each(function() {
+                this.reset();
+            });
 
             // 등록 모달 숨김
             exampleModal.hide();
@@ -224,44 +224,54 @@
 
         // 삭제
         function del(id) {
-            if (confirm("삭제하시겠습니까?")) document.getElementById('nameCard' + id).remove();
+            if (confirm("삭제하시겠습니까?")) $('#nameCard' + id).remove();
         }
 
         // 수정
         function edit(id) {
-            document.getElementById('cardText' + id).classList.add('d-none');
-            document.getElementById('cardForm' + id).classList.remove('d-none');
+            $('#cardText' + id).addClass('d-none');
+            $('#cardForm' + id).removeClass('d-none');
         }
 
         // 저장
         function save(id) {
-            document.getElementById('cardText' + id).classList.remove('d-none');
-            document.getElementById('cardForm' + id).classList.add('d-none');
-
             // 회사
-            document.getElementById('companyText' + id).classList.remove('d-none');
-            document.getElementById('companyText' + id).innerText = document.getElementById('companyInput' + id).value;
-            document.getElementById('companyInput' + id).classList.add('d-none');
+            $('#companyText' + id).text($('#companyInput' + id).val());
             // 직책
-            document.getElementById('positionText' + id).classList.remove('d-none');
-            document.getElementById('positionText' + id).innerText = document.getElementById('positionSelect' + id).value;
-            document.getElementById('positionSelect' + id).classList.add('d-none');
+            $('#positionText' + id).text($('#positionSelect' + id).val());
             // 이름
-            document.getElementById('nameText' + id).classList.remove('d-none');
-            document.getElementById('nameText' + id).innerText = document.getElementById('nameInput' + id).value;
-            document.getElementById('nameInput' + id).classList.add('d-none');
+            $('#nameText' + id).text($('#nameInput' + id).val());
             // 연락처
-            document.getElementById('telText' + id).classList.remove('d-none');
-            document.getElementById('telText' + id).innerText = document.getElementById('telInput' + id).value;
-            document.getElementById('telInput' + id).classList.add('d-none');
+            $('#telText' + id).text($('#telInput' + id).val());
             // 이메일
-            document.getElementById('emailText' + id).classList.remove('d-none');
-            document.getElementById('emailText' + id).innerText = document.getElementById('emailInput' + id).value;
-            document.getElementById('emailInput' + id).classList.add('d-none');
+            $('#emailText' + id).text($('#emailInput' + id).val());
             // 주소
-            document.getElementById('addressText' + id).classList.remove('d-none');
-            document.getElementById('addressText' + id).innerText = document.getElementById('addressInput' + id).value;
-            document.getElementById('addressInput' + id).classList.add('d-none');
+            $('#addressText' + id).text($('#addressInput' + id).val());
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
+        }
+
+        // 수정 취소
+        function cancel(id) {
+            /*
+            $('#companyInput' + id).val($('#cancelSave' + id).data('company'));
+            $('#positionSelect' + id).val($('#cancelSave' + id).data('position'));
+            $('#nameInput' + id).val($('#cancelSave' + id).data('name'));
+            $('#telInput' + id).val($('#cancelSave' + id).data('tel'));
+            $('#emailInput' + id).val($('#cancelSave' + id).data('email'));
+            $('#addressInput' + id).val($('#cancelSave' + id).data('address'));
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
+            */
+            // 폼 초기화
+            $('form[name=editForm' + id + ']').each(function() {
+                this.reset();
+            });
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
         }
     </script>
 </body>
