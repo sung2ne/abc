@@ -20,8 +20,57 @@
 <body>
     <div class="container pt-5">
         <div class="mb-3">
-            <button type="button" class="btn btn-sm btn-primary" onclick="add();">네임 카드 추가</button>
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">네임 카드 추가</button>
         </div>
+
+        <!-- 등록 모달 -->
+        <form name="addForm">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">네임 카드 등록</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="text" name="company" class="form-control" placeholder="회사">
+                            </div>
+                            <div class="mb-3">
+                                <select name="position" class="form-select">
+                                    <option value="사장">사장</option>
+                                    <option value="이사">이사</option>
+                                    <option value="부장">부장</option>
+                                    <option value="과장">과장</option>
+                                    <option value="대리">대리</option>
+                                    <option value="사원">사원</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="name" class="form-control" placeholder="이름">
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" name="tel" class="form-control" placeholder="연락처">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" name="email" class="form-control" placeholder="이메일">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="address" class="form-control" placeholder="주소">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="button" class="btn btn-primary" onclick="add();">등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--// 등록 모달 -->
+
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="nameCards">
         </div>
     </div>
@@ -36,6 +85,22 @@
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
         let num = 1;
+
+        const exampleModal = new bootstrap.Modal('#exampleModal', {
+            focus: true,    // 모달이 보일때 포커스 이동하기
+            backdrop: 'static', // 모달 밖에서 마우스 클릭이벤트 금지
+            keyboard: false, // esc 막기
+        });
+
+        // 모달 보일 때 이벤트
+        document.getElementById('exampleModal').addEventListener('show.bs.modal', event => {
+            document.addForm.reset();   // 폼 초기화
+        });
+
+        // 모달 숨길 때 이벤트
+        document.getElementById('exampleModal').addEventListener('hidden.bs.modal', event => {
+            document.addForm.reset();   // 폼 초기화
+        });
 
         // 짝수 구분 함수
         function isEven(i) {
@@ -147,6 +212,18 @@
 
             document.getElementById('nameCards').innerHTML += html;
             num++;
+
+            // 폼 초기화
+            // document.addForm.company.value = '';
+            // document.addForm.position.value = '사장';
+            // document.addForm.name.value = '';
+            // document.addForm.tel.value = '';
+            // document.addForm.email.value = '';
+            // document.addForm.address.value = '';
+            // document.addForm.reset();
+
+            // 등록 모달 숨김
+            exampleModal.hide();
         }
 
         // 삭제
