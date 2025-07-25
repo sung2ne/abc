@@ -109,13 +109,13 @@
 
         // 추가
         function add() {
-            let company = '(주)좋은사람들';
-            let position = '과장';
-            let name = '홍길동';
-            let tel = '010-1234-5678';
-            let email = 'hong@test.com';
+            let company = document.addForm.company.value;
+            let position = document.addForm.position.value;
+            let name = document.addForm.name.value;
+            let tel = document.addForm.tel.value;
+            let email = document.addForm.email.value;
+            let address = document.addForm.address.value;
             let html = '<div class="col" id="nameCard' + num + '">';
-            let address = '서울시 서대문구 가좌로 134';
 
             html += '<div>';
 
