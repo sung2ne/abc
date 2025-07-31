@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>명함</title>
+    <!-- bootstrap v5.3.7 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/css/bootstrap.min.css"
+        integrity="sha512-fw7f+TcMjTb7bpbLJZlP8g2Y4XcCyFZW8uy8HsRZsH/SwbMw0plKHFHr99DN3l04VsYNwvzicUX/6qurvIxbxw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- bootstrap icons v1.13.1 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <!-- jquery toast plugin v1.3.2 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css"
+        integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- custom style -->
+    <style>
+        /* 사용자 정의 스타일 */
+    </style>
+</head>
+
+<body>
+    <div class="container pt-5">
+        <div class="mb-3">
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">네임 카드 추가</button>
+        </div>
+
+        <!-- 등록 모달 -->
+        <form name="addForm" id="addForm">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">네임 카드 등록</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <input type="text" name="company" id="company" class="form-control" placeholder="회사">
+                            </div>
+                            <div class="mb-3">
+                                <select name="position" class="form-select" id="position">
+                                    <option value="사장">사장</option>
+                                    <option value="이사">이사</option>
+                                    <option value="부장">부장</option>
+                                    <option value="과장">과장</option>
+                                    <option value="대리">대리</option>
+                                    <option value="사원">사원</option>
+                                </select>
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="이름">
+                            </div>
+                            <div class="mb-3">
+                                <input type="tel" name="tel" id="tel" class="form-control" placeholder="연락처">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" name="email" id="email" class="form-control" placeholder="이메일">
+                            </div>
+                            <div class="mb-3">
+                                <input type="text" name="address" id="address" class="form-control" placeholder="주소">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">취소</button>
+                            <button type="submit" class="btn btn-primary">등록</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!--// 등록 모달 -->
+
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3" id="nameCards">
+        </div>
+    </div>
+
+    <!-- bootstrap v5.3.7 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.7/js/bootstrap.bundle.min.js"
+        integrity="sha512-Tc0i+vRogmX4NN7tuLbQfBxa8JkfUSAxSFVzmU31nVdHyiHElPPy2cWfFacmCJKw0VqovrzKhdd2TSTMdAxp2g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jquery v3.7.1 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jquery toast plugin v1.3.2 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js"
+        integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- jquery validate v1.21.0 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.21.0/jquery.validate.min.js"
+        integrity="sha512-KFHXdr2oObHKI9w4Hv1XPKc898mE4kgYx58oqsc/JqqdLMDI4YjOLzom+EMlW8HFUd0QfjfAvxSL6sEq/a42fQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let num = 1;
+
+        $('#addForm').validate({
+            rules: {
+                company: {
+                    required: true,
+                    minlength: 2
+                },
+                name: {
+                    required: true,
+                    minlength: 2
+                },
+                tel: {
+                    required: true
+                },
+                email: {
+                    required: true,
+                    email: true
+                },
+                address: {
+                    required: true,
+                    minlength: 2
+                },
+            },
+            messages: {
+                company: {
+                    required: '회사명을 넣어주세요.',
+                    minlength: '회사명은 {0}글자 이상 입력해주세요.'
+                },
+                name: {
+                    required: '이름을 넣어주세요.',
+                    minlength: '이름은 {0}글자 이상 입력해주세요.'
+                },
+                tel: {
+                    required: '연락처를 넣어주세요.'
+                },
+                email: {
+                    required: '이메일을 넣어주세요.',
+                    email: '올바른 형식의 이메일을 넣어주세요'
+                },
+                address: {
+                    required: '주소을 넣어주세요.',
+                    minlength: '주소은 {0}글자 이상 입력해주세요.'
+                },
+            },
+            submitHandler: function(form, event) {
+                event.preventDefault();
+                //add();
+            }
+        });
+
+        const exampleModal = new bootstrap.Modal('#exampleModal', {
+            focus: true,    // 모달이 보일때 포커스 이동하기
+            backdrop: 'static', // 모달 밖에서 마우스 클릭이벤트 금지
+            keyboard: false, // esc 막기
+        });
+
+        // 짝수 구분 함수
+        function isEven(i) {
+            return (i % 2) ? false : true;
+        }
+
+        // 추가
+        function add() {
+
+
+            let company = $('input[name=company]').val();
+            let position = $('select[name=position]').val();
+            let name = $('input[name=name]').val();
+            let tel = $('input[name=tel]').val();
+            let email = $('input[name=email]').val();
+            let address = $('input[name=address]').val();
+            let html = '<div class="col" id="nameCard' + num + '">';
+
+            html += '<div>';
+
+            // 텍스트 화면
+            html += '<div class="card shadow-sm ';
+
+            // 홀수에 배경 넣기
+            if (!isEven(num)) html += 'bg-light';
+
+            html += '" id="cardText' + num + '">';
+            html += '<div class="card-body">';
+            html += '<p class="card-text">';
+            html += '<div class="mb-3">';
+            // 회사
+            html += '<span id="companyText' + num + '">' + company + '</span>';
+            html += '</div>';
+            html += '<div class="mb-3">';
+            // 직책
+            html += '<span class="text-muted" id="positionText' + num + '">' + position + '</span>&nbsp;';
+            // 이름
+            html += '<span id="nameText' + num + '">' + name + '</span>';
+            html += '</div>';
+            html += '<div class="mb-3 d-flex justify-content-between">';
+            html += '<div>';
+            // 연락처
+            html += '<span id="telText' + num + '">' + tel + '</span>';
+            html += '</div>';
+            html += '<div>';
+            // 이메일
+            html += '<span id="emailText' + num + '">' + email + '</span>';
+            html += '</div>';
+            html += '</div>';
+            html += '<div class="mb-3">';
+            // 주소
+            html += '<span id="addressText' + num + '">' + address + '</span>';
+            html += '</div>';
+            html += '</p>';
+            html += '<div class="d-flex justify-content-end">';
+            html += '<button type="button" class="btn btn-sm btn-outline-warning me-2" data-role="edit" onclick="edit(' + num + ')" id="btnEdit' + num + '">수정</button>';
+            html += '<button type="button" class="btn btn-sm btn-outline-danger" onclick="del(' + num + ')" id="btnDelete' + num + '">삭제</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            // 수정 화면
+            html += '<form name="editForm' + num + '">';
+            html += '<div class="card d-none shadow-sm ';
+
+            // 홀수에 배경 넣기
+            if (!isEven(num)) html += 'bg-light';
+
+            html += '" id="cardForm' + num + '">';
+            html += '<div class="card-body">';
+            html += '<p class="card-text">';
+            // 회사
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="companyInput' + num + '" class="form-control" value="' + company + '">';
+            html += '</div>';
+            // 직책
+            html += '<div class="mb-3">';
+            html += '<select id="positionSelect' + num + '" class="form-select">';
+            html += '<option value="사장" ' + (position == '사장' ? 'selected' : '') + '>사장</option>';
+            html += '<option value="이사" ' + (position == '이사' ? 'selected' : '') + '>이사</option>';
+            html += '<option value="부장" ' + (position == '부장' ? 'selected' : '') + '>부장</option>';
+            html += '<option value="과장" ' + (position == '과장' ? 'selected' : '') + '>과장</option>';
+            html += '<option value="대리" ' + (position == '대리' ? 'selected' : '') + '>대리</option>';
+            html += '<option value="사원" ' + (position == '사원' ? 'selected' : '') + '>사원</option>';
+            html += '</select>'
+            html += '</div>';
+            // 이름
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="nameInput' + num + '" class="form-control" value="' + name + '">';
+            html += '</div>';
+            // 연락처
+            html += '<div class="mb-3">';
+            html += '<input type="tel" id="telInput' + num + '" class="form-control" value="' + tel + '">';
+            html += '</div>';
+            // 이메일
+            html += '<div class="mb-3">';
+            html += '<input type="email" id="emailInput' + num + '" class="form-control" value="' + email + '">';
+            html += '</div>';
+            // 주소
+            html += '<div class="mb-3">';
+            html += '<input type="text" id="addressInput' + num + '" class="form-control" value="' + address + '">';
+            html += '</div>';
+            html += '</p>';
+            html += '<div class="d-flex justify-content-end">';
+            html += '<button type="button" class="btn btn-sm btn-secondary me-2" onclick="cancel(' + num + ')"';
+            html += ' data-company="' + company + '"';
+            html += ' data-position="' + position + '"';
+            html += ' data-name="' + name + '"';
+            html += ' data-tel="' + tel + '"';
+            html += ' data-email="' + email + '"';
+            html += ' data-address="' + address + '"';
+            html += ' id="cancelSave' + num + '">취소</button>';
+            html += '<button type="button" class="btn btn-sm btn-outline-success" data-role="save" onclick="save(' + num + ')" id="btnSave' + num + '">저장</button>';
+            html += '</div>';
+            html += '</div>';
+            html += '</form>';
+            html += '</div>';
+            html += '</div>';
+            html += '</div>';
+
+            $('#nameCards').append(html);
+            num++;
+
+            // 폼 초기화
+            $('form[name=addForm]').each(function() {
+                this.reset();
+            });
+
+            // 등록 모달 숨김
+            exampleModal.hide();
+
+            // toast
+            $.toast({
+                heading: '등록 성공',
+                text: '네임카드가 등록되었습니다.',
+                showHideTransition: 'slide',
+                icon: 'success',
+                // bgColor : 'blue',              // Background color for toast
+                textColor : '#eee',            // text color
+                allowToastClose : true,       // Show the close button or not
+                hideAfter : 5000,              // `false` to make it sticky or time in miliseconds to hide after
+                stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                textAlign : 'left',            // Alignment of text i.e. left, right, center
+                position : 'top-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+            });
+        }
+
+        // 삭제
+        function del(id) {
+            if (confirm("삭제하시겠습니까?")) {
+                $('#nameCard' + id).remove();
+
+                // toast
+                $.toast({
+                    heading: '삭제 성공',
+                    text: '네임카드가 삭제되었습니다.',
+                    showHideTransition: 'slide',
+                    icon: 'error',
+                    // bgColor : 'blue',              // Background color for toast
+                    textColor : '#eee',            // text color
+                    allowToastClose : true,       // Show the close button or not
+                    hideAfter : 5000,              // `false` to make it sticky or time in miliseconds to hide after
+                    stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                    textAlign : 'left',            // Alignment of text i.e. left, right, center
+                    position : 'top-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+                });
+            }
+        }
+
+        // 수정
+        function edit(id) {
+            $('#cardText' + id).addClass('d-none');
+            $('#cardForm' + id).removeClass('d-none');
+        }
+
+        // 저장
+        function save(id) {
+            // 회사
+            $('#companyText' + id).text($('#companyInput' + id).val());
+            // 직책
+            $('#positionText' + id).text($('#positionSelect' + id).val());
+            // 이름
+            $('#nameText' + id).text($('#nameInput' + id).val());
+            // 연락처
+            $('#telText' + id).text($('#telInput' + id).val());
+            // 이메일
+            $('#emailText' + id).text($('#emailInput' + id).val());
+            // 주소
+            $('#addressText' + id).text($('#addressInput' + id).val());
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
+
+            // toast
+            $.toast({
+                heading: '저장 성공',
+                text: '네임카드가 저장되었습니다.',
+                showHideTransition: 'slide',
+                icon: 'info',
+                // bgColor : 'blue',              // Background color for toast
+                textColor : '#eee',            // text color
+                allowToastClose : true,       // Show the close button or not
+                hideAfter : 5000,              // `false` to make it sticky or time in miliseconds to hide after
+                stack : 5,                     // `fakse` to show one stack at a time count showing the number of toasts that can be shown at once
+                textAlign : 'left',            // Alignment of text i.e. left, right, center
+                position : 'top-right'       // bottom-left or bottom-right or bottom-center or top-left or top-right or top-center or mid-center or an object representing the left, right, top, bottom values to position the toast on page
+            });
+        }
+
+        // 수정 취소
+        function cancel(id) {
+            /*
+            $('#companyInput' + id).val($('#cancelSave' + id).data('company'));
+            $('#positionSelect' + id).val($('#cancelSave' + id).data('position'));
+            $('#nameInput' + id).val($('#cancelSave' + id).data('name'));
+            $('#telInput' + id).val($('#cancelSave' + id).data('tel'));
+            $('#emailInput' + id).val($('#cancelSave' + id).data('email'));
+            $('#addressInput' + id).val($('#cancelSave' + id).data('address'));
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
+            */
+            // 폼 초기화
+            $('form[name=editForm' + id + ']').each(function() {
+                this.reset();
+            });
+            // 입력 카드 숨기기, 텍스트 카드 보이기
+            $('#cardText' + id).removeClass('d-none');
+            $('#cardForm' + id).addClass('d-none');
+        }
+    </script>
+</body>
+
+</html>
