@@ -141,9 +141,15 @@
                     minlength: '주소은 {0}글자 이상 입력해주세요.'
                 },
             },
+            errorClass: 'is-invalid',
+            validClass: 'is-valid',
+            errorPlacement: function(error, element) {
+                error.addClass('invalid-feedback');
+                element.closest('.mb-3').append(error);
+            },
             submitHandler: function(form, event) {
-                event.preventDefault();
-                //add();
+                // event.preventDefault();
+                add();
             }
         });
 
